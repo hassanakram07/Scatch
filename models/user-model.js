@@ -8,7 +8,7 @@ const userSchema = mongoose.Schema({
         type : Array,
         default : []
     },
-    isadmin: String,
+    isadmin: Boolean,
     orders: {
         type: Array,
          default: []

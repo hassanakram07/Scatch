@@ -1,41 +1,20 @@
 const express = require("express");
 const router = express.Router();
 const isloggedin = require("../middleware/isLoggedin");
-const fs = require("fs");
+const productModel = require("../models/product-model");
 
 router.get("/", function (req, res) {
   let error = req.flash("error");
-  res.render("index", { error: "" });
+  res.render("index", { error });
 });
 
-
-const Product = require("../models/product-model"); 
-
-router.get('/shop', (req, res) => {
-    const products = [
-        {
-            name: 'Laptop',
-            price: 55000,
-            bgcolor: '#f0f0f0',
-            panelcolor: '#ffffff',
-            textcolor: '#000000',
-            // image: fs.readFileSync('public/images/laptop.jpg')
-        },
-        {
-            name: 'Phone',
-            price: 25000,
-            bgcolor: '#e0e0e0',
-            panelcolor: '#f8f8f8',
-            textcolor: '#333333',
-            // image: fs.readdirSync("")
-        }
-    ];
-
-    res.render('shop', { products });  // Passing products to EJS
+router.get("/shop", async (req, res) => {
+  let products= await productModel.find();
+  res.render("shop", { products });
 });
 
 router.get("/logout", isloggedin, function (req, res) {
-  res.render("/logout");
+  res.render("shop");
 });
 
 module.exports = router;

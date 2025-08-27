@@ -24,6 +24,7 @@
 
         <div class="w-[75%] flex flex-col gap-5 h-screen">
             <div class="flex items-start gap-5">
+                <% products.forEach(function(products){ %>
                 <div class=" w-60 bg-red-500">
                     <div class="w-full h-52 bg-yellow-500"></div>
                     <div class="flex justify-between item-center px-4 py-4">
@@ -36,7 +37,7 @@
                         </a>
                     </div>
                 </div>
-            
+                    <% }) %>
             </div>
         </div>
     </div>

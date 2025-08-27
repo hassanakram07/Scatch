@@ -68,6 +68,17 @@ module.exports.loginUser = async function (req, res) {
   if (!user) return res.send("Email or Password is incorrect");
 
   bcrypt.compare(password, user.password, function (err, result) {
-    res.send(result);
+    if (result) {
+      let token = generateToken(user);
+      res.cookie("token", token);
+      res.redirect("/shop");
+    } else {
+      res.send("Email or Password is incorrect");
+    }
   });
+};
+
+module.exports.logout = function (req , res ){
+  res.cookie("token" , "");
+  res.redirect("/");
 };

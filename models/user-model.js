@@ -2,22 +2,23 @@ const { required } = require("joi");
 const mongoose = require("mongoose");
 
 const userSchema = mongoose.Schema({
-    fullname: String,
-    email: String,
-    password: {type:String,
-        required:true},
+  fullname: String,
+  email: String,
+  password: { type: String, required: true },
 
-    cart: {
-        type : Array,
-        default : []
+  cart: [
+    {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "product",
     },
-    
-    orders: {
-        type: Array,
-         default: []
-   },
-   contact: Number,
-   picture: String,
+  ],
+
+  orders: {
+    type: Array,
+    default: [],
+  },
+  contact: Number,
+  picture: String,
 });
 
-module.exports = mongoose.model("user" , userSchema);
+module.exports = mongoose.model("user", userSchema);
